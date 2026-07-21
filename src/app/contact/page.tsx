@@ -268,6 +268,39 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <style jsx>{`
+        .contact-header-section {
+          background-color: var(--color-coral-hero);
+          padding: 5.5rem 0 3.5rem 0;
+        }
+
+        .section-tagline {
+          font-family: var(--font-secondary);
+          font-size: 0.8125rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: var(--color-navy-dark);
+          opacity: 0.8;
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+
+        .subpage-title {
+          font-family: var(--font-primary);
+          font-size: 3rem;
+          font-weight: 700;
+          color: var(--color-navy-dark);
+          margin-bottom: 1rem;
+        }
+
+        .subpage-lead {
+          font-size: 1.125rem;
+          color: var(--color-navy-dark);
+          opacity: 0.9;
+          max-width: 650px;
+        }
+      `}</style>
     </>
   );
 }

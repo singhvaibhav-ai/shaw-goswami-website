@@ -1,598 +1,911 @@
+"use client";
+
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { 
+  ArrowRight, 
+  Target, 
   TrendingUp, 
+  Search, 
   Compass, 
-  PieChart, 
-  BookOpen, 
-  FileText, 
-  MessageSquare, 
-  Layers, 
-  Activity, 
-  Cpu, 
-  Globe, 
-  Briefcase, 
-  Shield, 
-  Calendar, 
-  Award, 
-  Users, 
-  ArrowRight,
-  Workflow,
-  Search,
-  Eye,
-  CheckCircle,
-  Zap,
-  Quote
+  Settings, 
+  Lightbulb, 
+  Database, 
+  Code, 
+  ShieldCheck,
+  CheckCircle2,
+  Building2,
+  Users,
+  MapPin,
+  ChevronRight
 } from "lucide-react";
-import styles from "./page.module.css";
-import { getSolutions } from "../lib/cms";
-import { getIndustries } from "../lib/cms";
-import { getInsights } from "../lib/cms";
+import { consultingServices, productsList } from "../data/solutions";
+import { industries } from "../data/industries";
+import { clientsData } from "../data/clients";
+import { quickAnswerHighlights } from "../data/faqs";
 
-// Grayscale logos mock
-const LOGOS = [
-  { name: "Boeing" },
-  { name: "Microsoft" },
-  { name: "PwC" },
-  { name: "Telespazio" },
-  { name: "Applied Materials" },
-  { name: "mPokket" }
-];
-
-export default async function HomePage() {
-  const allSolutions = await getSolutions();
-  const allIndustries = await getIndustries();
-  const allInsights = await getInsights();
-
-  // Map icon strings to Lucide components
-  const iconMap: { [key: string]: React.ComponentType<any> } = {
-    TrendingUp,
-    Compass,
-    PieChart,
-    BookOpen,
-    FileText,
-    MessageSquare,
-    Layers,
-    Activity,
-    Cpu,
-    Globe,
-    Briefcase
+export default function HomePage() {
+  const serviceIcons: { [key: string]: React.ReactNode } = {
+    Compass: <Compass size={24} />,
+    Settings: <Settings size={24} />,
+    Lightbulb: <Lightbulb size={24} />,
+    Database: <Database size={24} />,
+    Code: <Code size={24} />,
+    ShieldCheck: <ShieldCheck size={24} />
   };
 
   return (
-    <>
+    <div className="home-page-wrapper">
       {/* 1. HERO SECTION */}
-      <section className={styles.heroSection} aria-label="Introduction">
-        <div className="container">
-          <div className={styles.heroGrid}>
-            <div className={styles.heroContent}>
-              <h1 className={styles.heroHeading}>
-                Business Consulting <br />
-                for the <span className={styles.heroHighlight}>AI Era</span>
-              </h1>
-              <p className={styles.heroSubtext}>
-                We help organizations transform operations, modernize decision-making, and build sustainable competitive advantage through business strategy, data analytics, and artificial intelligence.
-              </p>
-              <div className={styles.heroButtons}>
-                <Link href="/contact" className="btn btn-primary">
-                  Book a Strategy Consultation &rarr;
-                </Link>
-                <Link href="/solutions" className="btn btn-secondary-dark">
-                  Explore Our Solutions
-                </Link>
+      <section className="hero-section">
+        <div className="hero-container">
+          <div className="hero-content">
+            <h1 className="hero-title">
+              Where AI<br />
+              Meets Business Goals
+            </h1>
+            <p className="hero-subtitle">
+              Businesses don’t need more AI experiments — they need P&L growth. We help leadership teams pinpoint operational friction and execute AI roadmaps that solve real problems.
+            </p>
+            <div className="hero-actions">
+              <Link href="/contact" className="btn-solid-navy">
+                BOOK A STRATEGY CALL <ArrowRight size={16} />
+              </Link>
+              <Link href="/about" className="btn-outline-navy">
+                EXPLORE OUR APPROACH <ArrowRight size={16} />
+              </Link>
+            </div>
+
+            {/* Bottom Feature Strip */}
+            <div className="hero-pills-bar">
+              <div className="pill-item">
+                <Target size={18} />
+                <span>Diagnose Friction</span>
+              </div>
+              <div className="pill-divider" />
+              <div className="pill-item">
+                <Compass size={18} />
+                <span>Design AI Roadmaps</span>
+              </div>
+              <div className="pill-divider" />
+              <div className="pill-item">
+                <TrendingUp size={18} />
+                <span>Deliver Measurable Impact</span>
               </div>
             </div>
-            <div className={styles.heroImageContainer}>
-              <Image 
-                src="/images/boardroom_hero.png" 
-                alt="Executives in modern boardroom with AI data overlays" 
-                width={800} 
-                height={800} 
-                className={styles.heroImage}
-                priority
-              />
+          </div>
+
+          {/* Hero Right Graphic */}
+          <div className="hero-graphic-col">
+            <div className="graphic-canvas">
+              {/* Exact SVG Vector Trend Illustration from Home Page.png */}
+              <svg className="hero-trend-graphic-svg" viewBox="0 0 440 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  {/* Pattern for dotted circle grid */}
+                  <pattern id="dotGrid" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+                    <circle cx="3" cy="3" r="1.4" fill="#0B132B" opacity="0.38" />
+                  </pattern>
+                  {/* Drop shadow for nodes */}
+                  <filter id="nodeShadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#0B132B" floodOpacity="0.3" />
+                  </filter>
+                </defs>
+
+                {/* 1. Dotted Circle Background Grid */}
+                <mask id="circleMask">
+                  <circle cx="220" cy="200" r="160" fill="#FFFFFF" />
+                </mask>
+                <circle cx="220" cy="200" r="160" fill="url(#dotGrid)" mask="url(#circleMask)" />
+
+                {/* 2. Ascending Curvy Trend Line */}
+                <circle cx="50" cy="305" r="5.5" fill="#0B132B" />
+                <path d="M 50 305 Q 190 230 375 45" stroke="#0B132B" strokeWidth="4" strokeLinecap="round" fill="none" />
+                {/* Arrowhead at (375, 45) */}
+                <path d="M 345 45 L 375 45 L 375 75" stroke="#0B132B" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+
+                {/* 3. Node 1: Magnifying Glass (Search) centered at (114, 267) */}
+                <g filter="url(#nodeShadow)">
+                  <circle cx="114" cy="267" r="26" fill="#0B132B" />
+                  <circle cx="110" cy="263" r="7.5" stroke="#FFFFFF" strokeWidth="2.5" fill="none" />
+                  <line x1="115.5" y1="268.5" x2="123" y2="276" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />
+                </g>
+
+                {/* 4. Node 2: Target/Crosshair centered at (208, 197) */}
+                <g filter="url(#nodeShadow)">
+                  <circle cx="208" cy="197" r="26" fill="#0B132B" />
+                  <circle cx="208" cy="197" r="9.5" stroke="#FFFFFF" strokeWidth="2" fill="none" />
+                  <circle cx="208" cy="197" r="4.5" stroke="#FFFFFF" strokeWidth="2" fill="none" />
+                  <line x1="208" y1="183" x2="208" y2="211" stroke="#FFFFFF" strokeWidth="2" />
+                  <line x1="194" y1="197" x2="222" y2="197" stroke="#FFFFFF" strokeWidth="2" />
+                </g>
+
+                {/* 5. Node 3: Bar Chart centered at (303, 116) */}
+                <g filter="url(#nodeShadow)">
+                  <circle cx="303" cy="116" r="26" fill="#0B132B" />
+                  <rect x="292" y="118" width="4.5" height="9" rx="1" fill="#FFFFFF" />
+                  <rect x="300.5" y="112" width="4.5" height="15" rx="1" fill="#FFFFFF" />
+                  <rect x="309" y="105" width="4.5" height="22" rx="1" fill="#FFFFFF" />
+                </g>
+              </svg>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. CREDIBILITY METRICS BAR */}
-      <section className={styles.metricsWrapper} aria-label="Credibility Metrics">
-        <div className="container">
-          <div className={styles.metricsCard}>
-            <div className={styles.metricsGrid}>
-              <div className={styles.metricItem}>
-                <div className={styles.metricIcon}>
-                  <Award size={20} />
-                </div>
-                <div>
-                  <div className={styles.metricVal}>16+</div>
-                  <div className={styles.metricLabel}>Years</div>
-                  <div className={styles.metricDesc}>Enterprise Technology & Product Leadership</div>
-                </div>
-              </div>
+      {/* 2. ABOUT US / OUR STORY SECTION */}
+      <section className="story-section">
+        <div className="container-narrow">
+          <div className="story-header">
+            <span className="story-badge">About US</span>
+            <h2 className="story-title">Our Story</h2>
+            <div className="title-underline" />
+          </div>
 
-              <div className={`${styles.metricItem} ${styles.metricSeparator}`}>
-                <div className={styles.metricIcon}>
-                  <Users size={20} />
-                </div>
-                <div style={{ paddingLeft: "0.5rem" }}>
-                  <div className={styles.metricVal}>500K+</div>
-                  <div className={styles.metricLabel}>Users</div>
-                  <div className={styles.metricDesc}>Served Through AI-powered Platforms</div>
-                </div>
-              </div>
+          <div className="story-card">
+            <p className="story-lead">
+              AI is changing how businesses operate and grow. Yet, there remains a gap between what AI makes possible and what businesses are actually able to achieve with it.
+            </p>
+            <p>
+              Leadership teams don't need more AI experiments. They need clarity on where AI fits, which problems are worth solving, and how it can deliver measurable business value.
+            </p>
+            <div className="highlight-callout">
+              <strong>Shaw & Goswami was built to bridge this gap.</strong>
+            </div>
+            <p>
+              With 40+ years of combined experience across AI, data engineering, product development, and business consulting, we bring technology and business thinking together.
+            </p>
+            <p>
+              We start with the business—not the technology. We go deep into your operations, identify where the real opportunities lie, and find the right solutions to unlock growth.
+            </p>
 
-              <div className={`${styles.metricItem} ${styles.metricSeparator}`}>
-                <div className={styles.metricIcon}>
-                  <Layers size={20} />
-                </div>
-                <div style={{ paddingLeft: "0.5rem" }}>
-                  <div className={styles.metricVal}>Multiple</div>
-                  <div className={styles.metricLabel}>Industries</div>
-                  <div className={styles.metricDesc}>Across Healthcare, Manufacturing, Retail, Finance & Energy</div>
-                </div>
-              </div>
-
-              <div className={`${styles.metricItem} ${styles.metricSeparator}`}>
-                <div className={styles.metricIcon}>
-                  <Globe size={20} />
-                </div>
-                <div style={{ paddingLeft: "0.5rem" }}>
-                  <div className={styles.metricVal}>Global</div>
-                  <div className={styles.metricLabel}>Experience</div>
-                  <div className={styles.metricDesc}>Consulting & Delivery Across the Globe</div>
-                </div>
-              </div>
+            <div className="story-tagline-box">
+              <span>Understand the business.</span>
+              <span className="dot">•</span>
+              <span>Find the right fit.</span>
+              <span className="dot">•</span>
+              <span>Deliver measurable growth.</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. BUSINESS PROBLEMS WE SOLVE */}
-      <section className="section" aria-labelledby="problems-heading">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-tagline">Client Focus</span>
-            <h2 id="problems-heading">Business Problems We Solve</h2>
-            <p>We work with enterprise leadership to resolve operational frictions and align emerging technologies with clear business goals.</p>
+      {/* 3. WHAT WE DO / CONSULTING SERVICES */}
+      <section className="services-section">
+        <div className="container-custom">
+          <div className="section-title-block text-center">
+            <span className="section-subtitle">What We Do</span>
+            <h2 className="section-main-heading">Our Consulting Services</h2>
+            <p className="section-desc">From strategy to execution, we help you transform with AI and achieve lasting impact.</p>
           </div>
 
-          <div className={styles.metricsGrid}>
-            <div className="card">
-              <div className={styles.problemCard}>
-                <TrendingUp className={styles.problemIcon} />
-                <h3 className={styles.problemTitle}>Improve Operational Efficiency</h3>
-                <p className={styles.metricDesc}>Automate processes, reduce costs and improve speed, quality and scalability.</p>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className={styles.problemCard}>
-                <PieChart className={styles.problemIcon} />
-                <h3 className={styles.problemTitle}>Build Intelligent Decision Making</h3>
-                <p className={styles.metricDesc}>Transform data into predictive insights and make better decisions faster.</p>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className={styles.problemCard}>
-                <Cpu className={styles.problemIcon} />
-                <h3 className={styles.problemTitle}>Modernize Legacy Operations</h3>
-                <p className={styles.metricDesc}>Integrate AI into your existing systems and modernize operations without disruption.</p>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className={styles.problemCard}>
-                <Compass className={styles.problemIcon} />
-                <h3 className={styles.problemTitle}>Optimize Supply Chains</h3>
-                <p className={styles.metricDesc}>Improve forecasting, inventory management, procurement and logistics with intelligent algorithms.</p>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className={styles.problemCard}>
-                <Zap className={styles.problemIcon} />
-                <h3 className={styles.problemTitle}>Accelerate Digital Innovation</h3>
-                <p className={styles.metricDesc}>Build AI-powered products and new digital experiences that drive client value and growth.</p>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className={styles.problemCard}>
-                <Shield className={styles.problemIcon} />
-                <h3 className={styles.problemTitle}>Prepare Your Organization for AI</h3>
-                <p className={styles.metricDesc}>Build custom AI strategy, operational governance, and capabilities for long-term transformation.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. OUR CONSULTING SERVICES */}
-      <section className="section" style={{ backgroundColor: "#FFFFFF", borderTop: "1px solid var(--color-border)", borderBottom: "1px solid var(--color-border)" }} aria-labelledby="services-heading">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-tagline">Capabilities</span>
-            <h2 id="services-heading">Our Consulting Services</h2>
-            <p>Professional guidance and hands-on implementation capabilities across strategic, technological, and corporate domains.</p>
-          </div>
-
-          <div className="grid-3">
-            {/* Strategy Card */}
-            <div className="card">
-              <div className={styles.serviceCard}>
-                <div className={styles.serviceHeader}>
-                  <div className={styles.serviceIcon}>
-                    <Shield size={22} />
-                  </div>
-                  <h3 className={styles.serviceTitle}>Enterprise AI Strategy</h3>
+          <div className="services-grid">
+            {consultingServices.map((service) => (
+              <div key={service.id} className="service-card">
+                <div className="service-icon-box">
+                  {serviceIcons[service.iconName] || <Compass size={24} />}
                 </div>
-                <p className={styles.serviceDesc}>
-                  Define clear AI roadmaps aligned with corporate objectives, operational targets, and measurable business outcomes.
-                </p>
-                <Link href="/solutions" className="text-link">
-                  Learn More <ArrowRight size={14} />
-                </Link>
-              </div>
-            </div>
-
-            {/* Transformation Card */}
-            <div className="card">
-              <div className={styles.serviceCard}>
-                <div className={styles.serviceHeader}>
-                  <div className={styles.serviceIcon}>
-                    <Workflow size={22} />
+                <h3 className="service-card-title">{service.number}. {service.title}</h3>
+                <p className="service-card-desc">{service.description}</p>
+                <div className="service-bullets">
+                  <div className="bullet-col">
+                    {service.capabilitiesLeft.slice(0, 3).map((item, idx) => (
+                      <div key={idx} className="bullet-item">• {item}</div>
+                    ))}
                   </div>
-                  <h3 className={styles.serviceTitle}>Business Transformation</h3>
+                  <div className="bullet-col">
+                    {service.capabilitiesRight.slice(0, 3).map((item, idx) => (
+                      <div key={idx} className="bullet-item">• {item}</div>
+                    ))}
+                  </div>
                 </div>
-                <p className={styles.serviceDesc}>
-                  Redesign business processes, improve cross-functional operations, and drive transformation across the enterprise.
-                </p>
-                <Link href="/solutions" className="text-link">
-                  Learn More <ArrowRight size={14} />
+                <Link href="/solutions" className="service-learn-more">
+                  Learn more <ArrowRight size={14} />
                 </Link>
-              </div>
-            </div>
-
-            {/* Data & Analytics Card */}
-            <div className="card">
-              <div className={styles.serviceCard}>
-                <div className={styles.serviceHeader}>
-                  <div className={styles.serviceIcon}>
-                    <PieChart size={22} />
-                  </div>
-                  <h3 className={styles.serviceTitle}>Data & Analytics</h3>
-                </div>
-                <p className={styles.serviceDesc}>
-                  Build modern data architectures and integration layers that drive analytical insights and fuel intelligent decisions.
-                </p>
-                <Link href="/solutions" className="text-link">
-                  Learn More <ArrowRight size={14} />
-                </Link>
-              </div>
-            </div>
-
-            {/* AI Automation Card */}
-            <div className="card">
-              <div className={styles.serviceCard}>
-                <div className={styles.serviceHeader}>
-                  <div className={styles.serviceIcon}>
-                    <Cpu size={22} />
-                  </div>
-                  <h3 className={styles.serviceTitle}>AI & Automation</h3>
-                </div>
-                <p className={styles.serviceDesc}>
-                  Engineer custom AI solutions that automate back-office operations, augment decision-making, and create customer value.
-                </p>
-                <Link href="/solutions" className="text-link">
-                  Learn More <ArrowRight size={14} />
-                </Link>
-              </div>
-            </div>
-
-            {/* Product Engineering Card */}
-            <div className="card">
-              <div className={styles.serviceCard}>
-                <div className={styles.serviceHeader}>
-                  <div className={styles.serviceIcon}>
-                    <Layers size={22} />
-                  </div>
-                  <h3 className={styles.serviceTitle}>Product Engineering</h3>
-                </div>
-                <p className={styles.serviceDesc}>
-                  Design, build, and deploy scalable digital products, SaaS applications, and enterprise platforms that deliver impact.
-                </p>
-                <Link href="/solutions" className="text-link">
-                  Learn More <ArrowRight size={14} />
-                </Link>
-              </div>
-            </div>
-
-            {/* AI Governance Card */}
-            <div className="card">
-              <div className={styles.serviceCard}>
-                <div className={styles.serviceHeader}>
-                  <div className={styles.serviceIcon}>
-                    <Globe size={22} />
-                  </div>
-                  <h3 className={styles.serviceTitle}>AI Governance & Risk</h3>
-                </div>
-                <p className={styles.serviceDesc}>
-                  Establish ethical AI frameworks, private data sanitization lines, model audit trails, and strict compliance structures.
-                </p>
-                <Link href="/solutions" className="text-link">
-                  Learn More <ArrowRight size={14} />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. INDUSTRIES WE SERVE */}
-      <section className="section" aria-labelledby="industries-heading">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-tagline">Sectors</span>
-            <h2 id="industries-heading">Industries We Serve</h2>
-            <p>Providing specialized technology guidance tailored to the regulatory and operational realities of core global industries.</p>
-          </div>
-
-          <div className={styles.industryGrid}>
-            {allIndustries.slice(0, 8).map((ind) => {
-              const IndIcon = iconMap[ind.iconName] || Globe;
-              return (
-                <Link 
-                  href={`/industries/${ind.slug}`} 
-                  key={ind.slug} 
-                  className={styles.industryCard}
-                  aria-label={`Learn about our ${ind.title} consulting solutions`}
-                >
-                  <div className={styles.industryCardContent}>
-                    <IndIcon className={styles.industryCardIcon} size={28} />
-                    <h3 className={styles.industryCardTitle}>{ind.title}</h3>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className={styles.industryFooterLink}>
-            <Link href="/industries" className="text-link">
-              View All Industries <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. FEATURED SOLUTIONS */}
-      <section className="section section-dark" aria-labelledby="solutions-heading">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-tagline" style={{ color: "var(--color-cyan)" }}>Core Engines</span>
-            <h2 id="solutions-heading">Featured Solutions</h2>
-            <p style={{ color: "#94A3B8" }}>Proven frameworks and cognitive engines deployed to unlock immediate optimization value.</p>
-          </div>
-
-          <div className={styles.solutionsGrid}>
-            {allSolutions.slice(0, 9).map((sol) => {
-              const SolIcon = iconMap[sol.iconName] || Cpu;
-              return (
-                <Link 
-                  href={`/solutions/${sol.slug}`} 
-                  key={sol.slug} 
-                  className={styles.solutionCard}
-                  aria-label={`Explore our ${sol.title} solution`}
-                >
-                  <div className={styles.solutionCardHeader}>
-                    <h3 className={styles.solutionCardTitle}>{sol.title}</h3>
-                    <SolIcon className={styles.solutionCardIcon} size={20} />
-                  </div>
-                  <p className={styles.solutionCardDesc}>
-                    {sol.summary.slice(0, 110)}...
-                  </p>
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className={styles.solutionsFooterLink}>
-            <Link href="/solutions" className="text-link" style={{ color: "var(--color-cyan)" }}>
-              Explore All Solutions <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. HOW WE WORK (TIMELINE) */}
-      <section className="section" aria-labelledby="work-heading">
-        <div className="container">
-          <div className="section-header" style={{ textAlign: "center", marginLeft: "auto", marginRight: "auto" }}>
-            <span className="section-tagline">Methodology</span>
-            <h2 id="work-heading">How We Work</h2>
-            <p>Our structured execution framework ensures alignment, technical excellence, and smooth scaling across teams.</p>
-          </div>
-
-          <div className={styles.timelineContainer}>
-            <div className={styles.timelineStep}>
-              <div className={styles.timelineNode}>
-                <Search size={20} />
-              </div>
-              <span className={styles.timelineIndex}>Step 1</span>
-              <h3 className={styles.timelineStepName}>Discover</h3>
-              <p className={styles.timelineStepDesc}>Understand your business model, core operational pain points and objectives.</p>
-            </div>
-
-            <div className={styles.timelineStep}>
-              <div className={styles.timelineNode}>
-                <Eye size={20} />
-              </div>
-              <span className={styles.timelineIndex}>Step 2</span>
-              <h3 className={styles.timelineStepName}>Diagnose</h3>
-              <p className={styles.timelineStepDesc}>Assess current data stacks and map out the highest-value opportunities for AI.</p>
-            </div>
-
-            <div className={styles.timelineStep}>
-              <div className={styles.timelineNode}>
-                <PieChart size={20} />
-              </div>
-              <span className={styles.timelineIndex}>Step 3</span>
-              <h3 className={styles.timelineStepName}>Design</h3>
-              <p className={styles.timelineStepDesc}>Architect a tailored technical roadmap, security boundaries, and validation plans.</p>
-            </div>
-
-            <div className={styles.timelineStep}>
-              <div className={styles.timelineNode}>
-                <Workflow size={20} />
-              </div>
-              <span className={styles.timelineIndex}>Step 4</span>
-              <h3 className={styles.timelineStepName}>Deliver</h3>
-              <p className={styles.timelineStepDesc}>Build, validate and integrate custom engines into active business operations with agility.</p>
-            </div>
-
-            <div className={styles.timelineStep}>
-              <div className={styles.timelineNode}>
-                <CheckCircle size={20} />
-              </div>
-              <span className={styles.timelineIndex}>Step 5</span>
-              <h3 className={styles.timelineStepName}>Scale</h3>
-              <p className={styles.timelineStepDesc}>Optimize model performance, establish governance, and continuously add capabilities.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. TRUSTED BY LOGO BAR */}
-      <section className={styles.logosBar} aria-label="Organizations that trust us">
-        <div className="container">
-          <h2 className={styles.logosTitle}>Trusted by Organizations Across the Globe</h2>
-          <div className={styles.logosGrid}>
-            {LOGOS.map((logo, idx) => (
-              <div key={idx} className={styles.logoItem}>
-                <span className={styles.logoDot} />
-                <span>{logo.name}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 9. WHY SHAW & GOSWAMI */}
-      <section className="section" aria-labelledby="why-heading">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-tagline">Differentiators</span>
-            <h2 id="why-heading">Why Shaw & Goswami</h2>
-            <p>We blend institutional strategic rigor with deep AI engineering expertise to deliver real, measurable business value.</p>
+      {/* 4. INDUSTRIES WE SERVE PREVIEW */}
+      <section className="industries-preview-section">
+        <div className="container-custom">
+          <div className="section-title-block text-center">
+            <span className="section-subtitle">Sector Agnostic</span>
+            <h2 className="section-main-heading">Industries We Serve</h2>
+            <p className="section-desc">We bring deep AI and business expertise to every industry, helping organizations solve complex challenges.</p>
           </div>
 
-          <div className={styles.whyColumns}>
-            <div className={styles.whyColumn}>
-              <PieChart className={styles.whyIcon} />
-              <h3 className={styles.whyTitle}>Business First</h3>
-              <p className={styles.whyDesc}>We start with your strategic business objectives and model technical inputs to deliver hard EBITDA outcomes.</p>
-            </div>
-
-            <div className={styles.whyColumn}>
-              <Compass className={styles.whyIcon} />
-              <h3 className={styles.whyTitle}>Independent Advice</h3>
-              <p className={styles.whyDesc}>We recommend the tools and frameworks that create real value for your business, not proprietary vendor solutions.</p>
-            </div>
-
-            <div className={styles.whyColumn}>
-              <Award className={styles.whyIcon} />
-              <h3 className={styles.whyTitle}>Enterprise Expertise</h3>
-              <p className={styles.whyDesc}>Deep experience architecting secure pipelines inside complex multi-platform legacy infrastructures.</p>
-            </div>
-
-            <div className={styles.whyColumn}>
-              <Workflow className={styles.whyIcon} />
-              <h3 className={styles.whyTitle}>End-to-End Execution</h3>
-              <p className={styles.whyDesc}>From initial strategic mapping to deploying production-ready code, we partner with you at every single step.</p>
-            </div>
-
-            <div className={styles.whyColumn}>
-              <Shield className={styles.whyIcon} />
-              <h3 className={styles.whyTitle}>Responsible AI</h3>
-              <p className={styles.whyDesc}>We enforce strict compliance, vector boundaries, and ethical audit guardrails to protect your brand equity.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 10. CLIENT QUOTE */}
-      <section className={styles.quoteSection} aria-label="Client Testimonial">
-        <div className={styles.quoteContainer}>
-          <Quote size={40} style={{ color: "var(--color-cyan)", marginBottom: "1.5rem" }} />
-          <blockquote className={styles.quoteText}>
-            "Shaw & Goswami helped us turn complex data into clear decisions and real business impact."
-          </blockquote>
-          <cite className={styles.quoteAuthor}>— Client Partner, Manufacturing Division</cite>
-        </div>
-      </section>
-
-      {/* 11. INSIGHTS CAROUSEL */}
-      <section className="section" style={{ backgroundColor: "#FFFFFF", borderBottom: "1px solid var(--color-border)" }} aria-labelledby="insights-heading">
-        <div className="container">
-          <div className="section-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "1rem" }}>
-            <div>
-              <span className="section-tagline">Intellect</span>
-              <h2 id="insights-heading" style={{ margin: 0 }}>Latest Insights</h2>
-            </div>
-            <Link href="/insights" className="text-link">
-              View All Articles <ArrowRight size={14} />
-            </Link>
-          </div>
-
-          <div className="grid-3" style={{ marginTop: "2rem" }}>
-            {allInsights.slice(0, 3).map((article) => (
-              <article key={article.slug} className="card" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-                <span className="section-tagline" style={{ fontSize: "0.75rem", marginBottom: "0.5rem" }}>
-                  {article.category}
-                </span>
-                <h3 style={{ fontSize: "1.25rem", marginBottom: "0.75rem", color: "var(--color-navy)" }}>
-                  <Link href={`/insights/${article.slug}`}>
-                    {article.title}
-                  </Link>
-                </h3>
-                <p style={{ fontSize: "0.9375rem", flexGrow: 1, marginBottom: "1.5rem" }}>
-                  {article.excerpt}
-                </p>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid var(--color-border)", paddingTop: "1rem" }}>
-                  <span style={{ fontSize: "0.8125rem", color: "var(--color-text-gray)" }}>
-                    {article.date}
-                  </span>
-                  <Link href={`/insights/${article.slug}`} className="text-link">
-                    Read Article <ArrowRight size={12} />
-                  </Link>
-                </div>
-              </article>
+          <div className="industries-grid">
+            {industries.slice(0, 8).map((ind) => (
+              <Link href={`/industries/${ind.slug}`} key={ind.slug} className="industry-card-item">
+                <h4 className="ind-name">{ind.title}</h4>
+                <p className="ind-summary">{ind.summary}</p>
+                <span className="ind-link">Explore Solutions <ArrowRight size={14} /></span>
+              </Link>
             ))}
           </div>
+          
+          <div className="text-center" style={{ marginTop: "2.5rem" }}>
+            <Link href="/industries" className="btn-solid-navy">
+              VIEW ALL INDUSTRIES <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* 12. BOTTOM CTA SECTION */}
-      <section className={styles.bottomCtaSection} aria-labelledby="cta-heading">
-        <div 
-          className={styles.bottomCtaBg} 
-          style={{ backgroundImage: `url('/images/network_globe.png')` }}
-        />
-        <div className={styles.bottomCtaContainer}>
-          <h2 id="cta-heading" className={styles.bottomCtaHeading}>
-            Let's Build Your Intelligent Enterprise
-          </h2>
-          <p className={styles.bottomCtaSub}>
-            Whether you are exploring AI opportunities or scaling enterprise-wide operations, our consulting partners can guide your strategy and implementation.
-          </p>
-          <Link href="/contact" className="btn btn-primary" style={{ padding: "1rem 2rem", fontSize: "1rem" }}>
-            Schedule a Strategy Consultation &rarr;
-          </Link>
+      {/* 5. ORGANIZATIONS WE'VE WORKED WITH */}
+      <section className="clients-preview-section">
+        <div className="container-custom">
+          <div className="section-title-block text-center">
+            <span className="section-subtitle">Global Impact</span>
+            <h2 className="section-main-heading">Organizations We’ve Worked With</h2>
+          </div>
+
+          <div className="clients-logo-grid">
+            {clientsData.map((client) => (
+              <div key={client.id} className="client-badge-card">
+                <div className="client-badge-header">
+                  <Building2 size={20} className="client-icon" />
+                  <div>
+                    <h4 className="client-title">{client.name}</h4>
+                    <span className="client-loc">{client.location}, {client.country}</span>
+                  </div>
+                </div>
+                <span className="client-ind-tag">{client.industry}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center" style={{ marginTop: "2rem" }}>
+            <Link href="/clients" className="btn-outline-navy">
+              VIEW GLOBAL PRESENCE MAP <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </section>
-    </>
+
+      {/* 6. SMART FAQS QUICK HIGHLIGHTS */}
+      <section className="faq-preview-section">
+        <div className="container-custom">
+          <div className="section-title-block text-center">
+            <span className="section-subtitle">Answers to the Questions That Matter</span>
+            <h2 className="section-main-heading">Common Questions</h2>
+          </div>
+
+          <div className="faq-grid">
+            {quickAnswerHighlights.map((faq, idx) => (
+              <div key={idx} className="faq-card-box">
+                <h4 className="faq-q">{faq.question}</h4>
+                <p className="faq-a">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center" style={{ marginTop: "2rem" }}>
+            <Link href="/faqs" className="btn-solid-navy">
+              EXPLORE ALL FAQS <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. BOTTOM CTA BANNER */}
+      <section className="cta-banner-section">
+        <div className="container-custom">
+          <div className="cta-inner-card">
+            <div className="cta-left-text">
+              <h2>Ready to unlock AI’s true potential in your business?</h2>
+              <p>Let’s build your roadmap to growth with strategy, data, and execution.</p>
+            </div>
+            <div className="cta-right-btn">
+              <Link href="/contact" className="btn-cta-coral">
+                BOOK A STRATEGY CALL <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <style jsx>{`
+        /* HERO SECTION STYLES */
+        .hero-section {
+          background-color: var(--color-coral-hero);
+          padding: 6rem 0 5rem 0;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hero-container {
+          max-width: var(--max-width-desktop);
+          margin: 0 auto;
+          padding: 0 1.5rem;
+          display: grid;
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 3rem;
+          align-items: center;
+        }
+
+        .hero-title {
+          font-family: var(--font-primary);
+          font-size: clamp(3rem, 2.5rem + 3vw, 4.75rem);
+          font-weight: 700;
+          color: var(--color-navy-dark);
+          line-height: 1.1;
+          letter-spacing: -0.02em;
+          margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+          font-family: var(--font-secondary);
+          font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+          color: var(--color-navy-dark);
+          opacity: 0.9;
+          line-height: 1.6;
+          max-width: 580px;
+          margin-bottom: 2.25rem;
+        }
+
+        .hero-actions {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+          margin-bottom: 3.5rem;
+        }
+
+        .btn-solid-navy {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          background-color: #0B1B3D;
+          color: var(--color-white);
+          font-family: var(--font-secondary);
+          font-size: 0.875rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          padding: 0.95rem 1.85rem;
+          border-radius: 4px;
+          text-decoration: none;
+          transition: all 0.25s ease;
+          border: 1.5px solid #0B1B3D;
+          box-shadow: 0 4px 14px rgba(11, 27, 61, 0.25);
+        }
+
+        .btn-solid-navy:hover {
+          background-color: #060B18;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(11, 27, 61, 0.35);
+        }
+
+        .btn-outline-navy {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          background-color: transparent;
+          color: #0B1B3D;
+          border: 1.5px solid #0B1B3D;
+          font-family: var(--font-secondary);
+          font-size: 0.875rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          padding: 0.95rem 1.85rem;
+          border-radius: 4px;
+          text-decoration: none;
+          transition: all 0.25s ease;
+        }
+
+        .btn-outline-navy:hover {
+          background-color: rgba(11, 27, 61, 0.08);
+          transform: translateY(-2px);
+        }
+
+        .hero-pills-bar {
+          display: inline-flex;
+          align-items: center;
+          gap: 1.25rem;
+          background: rgba(255, 255, 255, 0.25);
+          backdrop-filter: blur(8px);
+          padding: 0.75rem 1.25rem;
+          border-radius: 40px;
+          border: 1px solid rgba(11, 19, 43, 0.12);
+        }
+
+        .pill-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: var(--color-navy-dark);
+        }
+
+        .pill-divider {
+          width: 1px;
+          height: 18px;
+          background-color: rgba(11, 19, 43, 0.2);
+        }
+
+        /* GRAPHIC CANVAS */
+        .graphic-canvas {
+          position: relative;
+          width: 100%;
+          max-width: 440px;
+          height: 400px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero-trend-graphic-svg {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+
+        .chart-svg {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 2;
+        }
+
+        .node-circle {
+          position: absolute;
+          width: 54px;
+          height: 54px;
+          border-radius: 50%;
+          background-color: var(--color-navy-dark);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 8px 24px rgba(11, 19, 43, 0.3);
+          z-index: 3;
+        }
+
+        .node-1 { top: 50%; left: 12%; }
+        .node-2 { top: 32%; left: 52%; }
+        .node-3 { top: 8%; left: 82%; }
+
+        /* STORY SECTION */
+        .story-section {
+          padding: var(--spacing-section) 0;
+          background-color: var(--color-cream-bg);
+        }
+
+        .container-narrow {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 0 1.5rem;
+        }
+
+        .story-header {
+          text-align: center;
+          margin-bottom: 2.5rem;
+        }
+
+        .story-badge {
+          font-family: var(--font-secondary);
+          font-size: 0.8125rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--color-coral-hero);
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+
+        .story-title {
+          font-family: var(--font-primary);
+          font-size: 2.75rem;
+          color: var(--color-navy-dark);
+          margin-bottom: 0.75rem;
+        }
+
+        .title-underline {
+          width: 50px;
+          height: 3px;
+          background-color: var(--color-navy-dark);
+          margin: 0 auto;
+          border-radius: 2px;
+        }
+
+        .story-card {
+          background-color: var(--color-white);
+          padding: 3rem;
+          border-radius: var(--border-radius-md);
+          box-shadow: var(--color-card-shadow);
+          border: 1px solid var(--color-border-subtle);
+        }
+
+        .story-lead {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: var(--color-navy-dark);
+          line-height: 1.6;
+        }
+
+        .highlight-callout {
+          background-color: var(--color-coral-light);
+          padding: 1rem 1.5rem;
+          border-left: 4px solid var(--color-coral-hero);
+          border-radius: var(--border-radius-sm);
+          margin: 1.5rem 0;
+          color: var(--color-navy-dark);
+        }
+
+        .story-tagline-box {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.75rem;
+          margin-top: 2.5rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid var(--color-border-light);
+          font-family: var(--font-primary);
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--color-navy-dark);
+        }
+
+        .dot {
+          color: var(--color-coral-hero);
+        }
+
+        /* SERVICES SECTION */
+        .services-section {
+          padding: var(--spacing-section) 0;
+          background-color: var(--color-white);
+        }
+
+        .container-custom {
+          max-width: var(--max-width-desktop);
+          margin: 0 auto;
+          padding: 0 1.5rem;
+        }
+
+        .section-title-block {
+          margin-bottom: 3.5rem;
+        }
+
+        .text-center { text-align: center; }
+
+        .section-subtitle {
+          font-family: var(--font-secondary);
+          font-size: 0.8125rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--color-coral-hero);
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+
+        .section-main-heading {
+          font-family: var(--font-primary);
+          font-size: 2.5rem;
+          color: var(--color-navy-dark);
+          margin-bottom: 0.75rem;
+        }
+
+        .section-desc {
+          color: var(--color-text-muted);
+          font-size: 1.0625rem;
+          max-width: 650px;
+          margin: 0 auto;
+        }
+
+        .services-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+        }
+
+        .service-card {
+          background-color: var(--color-cream-bg);
+          padding: 2.25rem;
+          border-radius: var(--border-radius-md);
+          border: 1px solid var(--color-border-subtle);
+          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .service-card:hover {
+          transform: translateY(-4px);
+          box-shadow: var(--color-card-shadow-hover);
+          border-color: var(--color-coral-border);
+        }
+
+        .service-icon-box {
+          width: 50px;
+          height: 50px;
+          border-radius: var(--border-radius-sm);
+          background-color: var(--color-coral-hero);
+          color: var(--color-navy-dark);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 1.25rem;
+        }
+
+        .service-card-title {
+          font-family: var(--font-primary);
+          font-size: 1.25rem;
+          color: var(--color-navy-dark);
+          margin-bottom: 0.75rem;
+        }
+
+        .service-card-desc {
+          font-size: 0.9375rem;
+          color: var(--color-text-muted);
+          margin-bottom: 1.5rem;
+        }
+
+        .service-bullets {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.5rem;
+          margin-top: auto;
+          margin-bottom: 1.5rem;
+          padding-top: 1rem;
+          border-top: 1px dashed var(--color-border-light);
+        }
+
+        .bullet-item {
+          font-size: 0.8125rem;
+          color: var(--color-navy-dark);
+          font-weight: 500;
+        }
+
+        .service-learn-more {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.875rem;
+          font-weight: 700;
+          color: var(--color-navy-dark);
+          text-decoration: none;
+        }
+
+        .service-learn-more:hover {
+          color: var(--color-coral-hero);
+        }
+
+        /* INDUSTRIES PREVIEW */
+        .industries-preview-section {
+          padding: var(--spacing-section) 0;
+          background-color: var(--color-cream-bg);
+        }
+
+        .industries-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.5rem;
+        }
+
+        .industry-card-item {
+          background-color: var(--color-white);
+          padding: 1.75rem;
+          border-radius: var(--border-radius-md);
+          border: 1.5px solid #CBD5E1 !important;
+          box-shadow: 0 4px 14px rgba(11, 19, 43, 0.05);
+          text-decoration: none;
+          transition: all 0.25s ease;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .industry-card-item:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 25px rgba(11, 19, 43, 0.1);
+          border-color: #0B132B !important;
+        }
+
+        .ind-name {
+          font-family: var(--font-primary);
+          font-size: 1.2rem;
+          color: var(--color-navy-dark);
+          margin-bottom: 0.5rem;
+        }
+
+        .ind-summary {
+          font-size: 0.875rem;
+          color: var(--color-text-muted);
+          margin-bottom: 1.25rem;
+          flex-grow: 1;
+        }
+
+        .ind-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.8125rem;
+          font-weight: 700;
+          color: var(--color-navy-dark);
+        }
+
+        /* CLIENTS PREVIEW */
+        .clients-preview-section {
+          padding: var(--spacing-section) 0;
+          background-color: var(--color-white);
+        }
+
+        .clients-logo-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
+        }
+
+        .client-badge-card {
+          background-color: var(--color-cream-bg);
+          padding: 1.5rem;
+          border-radius: var(--border-radius-md);
+          border: 1px solid var(--color-border-subtle);
+        }
+
+        .client-badge-header {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 0.75rem;
+        }
+
+        .client-icon {
+          color: var(--color-coral-hero);
+        }
+
+        .client-title {
+          font-family: var(--font-primary);
+          font-size: 1.05rem;
+          color: var(--color-navy-dark);
+        }
+
+        .client-loc {
+          font-size: 0.8125rem;
+          color: var(--color-text-light);
+          display: block;
+        }
+
+        .client-ind-tag {
+          display: inline-block;
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          background-color: var(--color-coral-light);
+          color: var(--color-navy-dark);
+          padding: 0.25rem 0.6rem;
+          border-radius: 4px;
+        }
+
+        /* FAQ PREVIEW */
+        .faq-preview-section {
+          padding: var(--spacing-section) 0;
+          background-color: var(--color-cream-bg);
+        }
+
+        .faq-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.75rem;
+        }
+
+        .faq-card-box {
+          background-color: var(--color-white);
+          padding: 2rem;
+          border-radius: var(--border-radius-md);
+          border: 1px solid var(--color-border-subtle);
+        }
+
+        .faq-q {
+          font-family: var(--font-primary);
+          font-size: 1.15rem;
+          color: var(--color-navy-dark);
+          margin-bottom: 0.75rem;
+        }
+
+        .faq-a {
+          font-size: 0.9375rem;
+          color: var(--color-text-muted);
+          line-height: 1.6;
+        }
+
+        /* CTA BANNER */
+        .cta-banner-section {
+          padding: 3rem 0;
+          background-color: var(--color-white);
+        }
+
+        .cta-inner-card {
+          background-color: var(--color-navy-dark);
+          border-radius: var(--border-radius-lg);
+          padding: 2.25rem 3rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 2rem;
+          color: var(--color-white);
+        }
+
+        .cta-left-text h2 {
+          font-family: var(--font-primary);
+          font-size: 2.25rem;
+          color: var(--color-white);
+          margin-bottom: 0.75rem;
+        }
+
+        .cta-left-text p {
+          color: #A0AEC0;
+          font-size: 1.1rem;
+        }
+
+        .btn-cta-coral {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          background-color: var(--color-coral-hero);
+          color: var(--color-navy-dark);
+          font-family: var(--font-secondary);
+          font-size: 0.875rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          padding: 1rem 1.85rem;
+          border-radius: var(--border-radius-sm);
+          text-decoration: none;
+          white-space: nowrap;
+          transition: all 0.25s ease;
+        }
+
+        .btn-cta-coral:hover {
+          background-color: #f09583;
+          transform: translateY(-2px);
+        }
+
+        @media (max-width: 992px) {
+          .hero-container {
+            grid-template-columns: 1fr;
+          }
+          .services-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+          .industries-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+          .clients-logo-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+          .cta-inner-card {
+            flex-direction: column;
+            text-align: center;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .services-grid,
+          .industries-grid,
+          .clients-logo-grid,
+          .faq-grid {
+            grid-template-columns: 1fr;
+          }
+          .hero-actions {
+            flex-direction: column;
+          }
+          .hero-pills-bar {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .pill-divider {
+            display: none;
+          }
+          .story-tagline-box {
+            flex-direction: column;
+            gap: 0.4rem;
+          }
+          .dot { display: none; }
+        }
+      `}</style>
+    </div>
   );
 }

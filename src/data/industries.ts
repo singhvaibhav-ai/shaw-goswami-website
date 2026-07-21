@@ -18,11 +18,11 @@ export interface Industry {
   title: string;
   summary: string;
   iconName: string;
-  bgImage: string;
+  bgImage?: string;
   challenges: string[];
   opportunities: string[];
   roadmap: IndustryRoadmapStep[];
-  solutions: string[]; // Linked solution slugs
+  solutions: string[];
   caseStudies: IndustryCaseStudy[];
   outcomes: string[];
 }
@@ -31,337 +31,234 @@ export const industries: Industry[] = [
   {
     slug: "healthcare",
     title: "Healthcare",
-    summary: "Deliver patient-centric care, reduce clinician administrative burdens, and optimize diagnostic operations using secure, HIPAA-compliant AI models.",
-    iconName: "Activity",
-    bgImage: "/images/healthcare_consulting.jpg",
+    summary: "Enhancing patient outcomes, optimizing operations, and unlocking insights with AI.",
+    iconName: "HeartPulse",
     challenges: [
-      "Clinician burnout from excessive EHR documentation workload.",
+      "Clinician burnout from excessive documentation workload.",
       "Fragmented patient data and slow clinical triage flows.",
       "Increasing costs of patient administration and claims management."
     ],
     opportunities: [
       "Clinical Charting Automation: Ambient audio-to-soap notes scribing.",
-      "Intelligent Patient Triage: Predicting readmission risks and triaging ER queues.",
+      "Intelligent Patient Triage: Predicting readmission risks and triaging queues.",
       "Medical Document Ingestion: Automating prior-authorization request audits."
     ],
     roadmap: [
-      { phase: "Phase 1", title: "Compliance & Data Governance Setup", duration: "1-2 Months", description: "Establish HIPAA-compliant cloud and data-sharing interfaces, mapping legacy EHR APIs (HL7/FHIR)." },
-      { phase: "Phase 2", title: "Ambient Scribe Pilot", duration: "3-4 Months", description: "Deploy ambient AI transcription to a test cohort of doctors to automate clinical charting and note creation." },
-      { phase: "Phase 3", title: "Claims Ingestion Automation", duration: "5-6 Months", description: "Roll out AI Document Intelligence to automatically process and pre-audit health insurance claims and referrals." },
-      { phase: "Phase 4", title: "Clinical Support Scaling", duration: "Ongoing", description: "Incorporate predictive AI models for preventive diagnostic suggestions and patient readmission risk alerts." }
+      { phase: "Phase 1", title: "Compliance & Data Setup", duration: "1 Month", description: "Establish HIPAA-compliant cloud interfaces and FHIR APIs." },
+      { phase: "Phase 2", title: "Clinical Support Pilot", duration: "2-3 Months", description: "Deploy ambient scribe and triage automation to test cohorts." }
     ],
-    solutions: ["healthcare-ai-assistant", "document-intelligence", "knowledge-assistant"],
+    solutions: ["healthcare-ai-assistant", "document-intelligence"],
     caseStudies: [
       {
-        title: "Ambient Scribe Integration for Hospital System",
-        challenge: "Clinicians at a large healthcare network spent 3.5 hours per day on administrative documentation, causing severe burnout.",
-        solution: "Integrated a custom ambient clinical transcription system mapping to the hospital's EHR API.",
-        outcome: "Drastically reduced administrative time and restored doctor-patient interaction quality.",
-        metrics: [
-          "2.2 Hours saved per doctor/day",
-          "98.5% EHR Chart Accuracy",
-          "15% increase in daily patient visits capacity"
-        ]
+        title: "AI-Powered Patient Support Platform",
+        challenge: "Clinicians spent excessive hours on administrative paperwork rather than patient care.",
+        solution: "Implemented an AI clinical assistant for patient engagement and administrative reduction.",
+        outcome: "40% reduction in admin tasks and 35% improved patient satisfaction.",
+        metrics: ["40% Reduction in Admin Tasks", "35% Improved Patient Satisfaction"]
       }
     ],
-    outcomes: [
-      "Substantive reduction in administrative overhead",
-      "Improved clinical accuracy and clinical audit trail compliance",
-      "Faster prior-authorization and billing cycles"
-    ]
+    outcomes: ["Reduced Administrative Burden", "Faster Patient Triage", "Higher Diagnostic Efficiency"]
   },
   {
-    slug: "retail-fmcg",
-    title: "Retail & FMCG",
-    summary: "Align inventory dynamically with shifting consumer demands, optimize pricing strategies, and personalize customer experiences at scale.",
-    iconName: "ShoppingBag",
-    bgImage: "/images/retail_consulting.jpg",
+    slug: "oil-and-gas",
+    title: "Oil & Gas",
+    summary: "Improving asset performance, predicting risk, and optimizing operations across the value chain.",
+    iconName: "Flame",
     challenges: [
-      "Unpredictable seasonal demand swings causing inventory stockouts and markdowns.",
-      "Siloed sales and marketing channels leading to disjointed data.",
-      "High customer acquisition costs coupled with low retention rates."
+      "Unplanned equipment downtime on offshore and pipeline infrastructure.",
+      "Safety risks and delayed environmental reporting.",
+      "Complex supply chain and logistics across remote operational sites."
     ],
     opportunities: [
-      "Predictive Merchandising: High-precision demand forecasting at SKU-level.",
-      "Dynamic Pricing Engines: Adjusting margins in real-time based on competitors and supply.",
-      "Autonomous Customer Care: Conversational agents handling refunds, rebookings, and tracking."
+      "Predictive Maintenance: Sensor data analytics for early failure detection.",
+      "Logistics Optimization: Real-time tracking of fuel and spare parts transportation.",
+      "Safety Monitoring: AI computer vision for field hazard detection."
     ],
     roadmap: [
-      { phase: "Phase 1", title: "Omnichannel Data Ingestion", duration: "2 Months", description: "Consolidate ERP, web commerce, and store POS transaction logs into a clean, modern data warehouse." },
-      { phase: "Phase 2", title: "SKU Forecasting Rollout", duration: "3-4 Months", description: "Deploy localized demand forecasting models across top-performing distribution zones." },
-      { phase: "Phase 3", title: "Dynamic Pricing Engine", duration: "5 Months", description: "Implement real-time market scrapers and margin optimizers to dynamically adjust ecommerce prices." },
-      { phase: "Phase 4", title: "AI Loyalty & Chat Agents", duration: "6 Months+", description: "Deploy transactional chat agents for customized customer offers and support resolution." }
+      { phase: "Phase 1", title: "IoT Sensor Integration", duration: "1-2 Months", description: "Connect telemetry streams into centralized data platform." },
+      { phase: "Phase 2", title: "Predictive Models Rollout", duration: "3 Months", description: "Train and deploy failure prevention algorithms." }
     ],
-    solutions: ["demand-forecasting", "ai-customer-support", "document-intelligence"],
+    solutions: ["supply-chain-intelligence", "demand-forecasting"],
     caseStudies: [
       {
-        title: "Supply-Demand Rebalancing for Multi-Brand Retailer",
-        challenge: "A national clothing brand suffered from huge end-of-season inventory write-offs due to inaccurate demand predictions.",
-        solution: "Deployed custom predictive SKU forecasting pipelines utilizing localized marketing budgets and weather trends.",
-        outcome: "Synchronized manufacturing targets directly with forecasted customer buying cycles.",
-        metrics: [
-          "32% Reduction in end-of-season inventory markdowns",
-          "18% Increase in full-price sales volumes",
-          "ROI on implementation achieved in 4.5 months"
-        ]
+        title: "Predictive Maintenance for Operational Excellence",
+        challenge: "Pipeline equipment failures caused costly downtime and emergency repair expenditures.",
+        solution: "Deployed ML predictive maintenance algorithms capturing real-time vibration and temperature data.",
+        outcome: "30% reduction in downtime and $2M+ in annual cost savings.",
+        metrics: ["30% Reduction in Downtime", "$2M+ Annual Cost Savings"]
       }
     ],
-    outcomes: [
-      "Drastic reduction in warehouse inventory carrying costs",
-      "Minimized shelf stockouts of top-margin items",
-      "Unified operational visibility across online and offline channels"
-    ]
+    outcomes: ["Zero Unplanned Halts", "Lower Operational Risk", "Automated Compliance Auditing"]
   },
   {
-    slug: "manufacturing",
-    title: "Manufacturing",
-    summary: "Optimize heavy asset performance, prevent assembly line bottlenecks, and scale quality control through digital twins and computer vision.",
+    slug: "fmcg",
+    title: "FMCG",
+    summary: "Driving demand, improving supply chains, and creating data-driven customer value.",
+    iconName: "ShoppingCart",
+    challenges: [
+      "Inaccurate demand forecasting leading to stockouts or excess holding.",
+      "Fragmented retail distributor channels with poor visibility.",
+      "Shifting consumer preferences and fast-moving category trends."
+    ],
+    opportunities: [
+      "Demand & Promotion Forecasting: Machine learning for SKU level precision.",
+      "Distributor Orchestration: Real-time inventory tracking across regional hubs.",
+      "Trade Spend Optimization: Algorithmic analysis of promotional ROI."
+    ],
+    roadmap: [
+      { phase: "Phase 1", title: "Data Pipeline Aggregation", duration: "1 Month", description: "Consolidate sales, warehouse, and trade data." },
+      { phase: "Phase 2", title: "Predictive Engine Rollout", duration: "2-3 Months", description: "Launch multi-variable forecasting engine." }
+    ],
+    solutions: ["demand-forecasting", "supply-chain-intelligence"],
+    caseStudies: [
+      {
+        title: "Demand Forecasting & Inventory Optimization",
+        challenge: "High forecast error rate caused chronic stockouts and high holding costs.",
+        solution: "Built a machine learning forecasting engine integrating weather and promotional trends.",
+        outcome: "25% improvement in forecast accuracy and 20% lower inventory holding costs.",
+        metrics: ["25% Improvement in Forecast Accuracy", "20% Lower Inventory Holding Costs"]
+      }
+    ],
+    outcomes: ["25% Better Forecast Precision", "20% Lower Holding Overhead", "Improved On-Shelf Availability"]
+  },
+  {
+    slug: "equine-services",
+    title: "Equine Services",
+    summary: "Advancing animal health, performance analytics, and operational excellence in equine care.",
+    iconName: "Activity",
+    challenges: [
+      "Manual tracking of equine health, training metrics, and recovery regimens.",
+      "Lack of centralized data integration for veterinary and stable management.",
+      "High costs associated with unpredicted injuries and athletic downtime."
+    ],
+    opportunities: [
+      "Equine Performance Tracking: Biometric wearable data analytics.",
+      "Veterinary EHR & AI Assistant: Automated medical records and care alerts.",
+      "Operational Scheduling: Smart facility and breeding management."
+    ],
+    roadmap: [
+      { phase: "Phase 1", title: "Biometric Data Platform", duration: "1 Month", description: "Integrate sensor and health metrics into unified dashboard." }
+    ],
+    solutions: ["enterprise-knowledge-assistant", "document-intelligence"],
+    caseStudies: [
+      {
+        title: "Data-Driven Performance Analytics Platform",
+        challenge: "Managing health and training telemetry across high-value horses was fragmented.",
+        solution: "Developed an equine performance analytics platform tracking health, training, and recovery.",
+        outcome: "50% improvement in tracking accuracy and enhanced athletic outcomes.",
+        metrics: ["50% Improvement in Tracking Accuracy", "Better Performance Outcomes"]
+      }
+    ],
+    outcomes: ["Enhanced Equine Health Tracking", "Proactive Injury Prevention", "Operational Excellence"]
+  },
+  {
+    slug: "fintech",
+    title: "FinTech",
+    summary: "Strengthening risk, compliance, fraud detection, and customer experience with intelligent systems.",
+    iconName: "Building2",
+    challenges: [
+      "Rapidly changing regulatory compliance requirements and reporting.",
+      "Real-time fraud detection in high-volume transaction environments.",
+      "Customer churn in competitive digital banking products."
+    ],
+    opportunities: [
+      "AI Fraud Detection: Graph analytics and anomaly detection models.",
+      "Automated Regulatory Compliance: GenAI policy and audit engines.",
+      "Personalized Financial Advisory: Intelligent customer engagement."
+    ],
+    roadmap: [
+      { phase: "Phase 1", title: "Compliance Architecture", duration: "1-2 Months", description: "Deploy automated risk scoring and monitoring." }
+    ],
+    solutions: ["governance-risk-compliance", "ai-implementation"],
+    caseStudies: [],
+    outcomes: ["Real-time Fraud Prevention", "Automated Audit Readiness", "Higher Customer Retention"]
+  },
+  {
+    slug: "hospitality",
+    title: "Hospitality",
+    summary: "Elevating guest experiences, optimizing revenue, and improving operational efficiency.",
+    iconName: "BedDouble",
+    challenges: [
+      "Fluctuating seasonal occupancy and static pricing strategies.",
+      "High staff turnover and operational inefficiency in guest management.",
+      "Fragmented guest feedback across multiple booking platforms."
+    ],
+    opportunities: [
+      "Dynamic Revenue Management: Algorithmic pricing tailored to demand.",
+      "AI Concierge & Guest Services: 24/7 multilingual guest assistants.",
+      "Energy & Facility Optimization: IoT smart building management."
+    ],
+    roadmap: [
+      { phase: "Phase 1", title: "Guest Intelligence Setup", duration: "1 Month", description: "Integrate PMS data and AI dynamic pricing." }
+    ],
+    solutions: ["customer-support-ai", "demand-forecasting"],
+    caseStudies: [],
+    outcomes: ["Increased RevPAR", "Seamless Guest Experience", "Reduced Energy Overhead"]
+  },
+  {
+    slug: "spacetech",
+    title: "SpaceTech",
+    summary: "Enabling mission success through advanced analytics, simulation, and intelligent systems.",
+    iconName: "Rocket",
+    challenges: [
+      "Complex telemetry analysis across satellite constellations.",
+      "Mission-critical risk simulation with strict zero-fault tolerances.",
+      "High volume Earth observation image processing requirements."
+    ],
+    opportunities: [
+      "Orbital Telemetry Analytics: Anomaly detection in satellite telemetry.",
+      "Geospatial AI Processing: Computer vision on satellite imagery.",
+      "Automated Ground Station Scheduling: Algorithmic pass allocation."
+    ],
+    roadmap: [
+      { phase: "Phase 1", title: "Telemetry Analytics", duration: "2 Months", description: "Build real-time satellite stream anomaly detectors." }
+    ],
+    solutions: ["ai-implementation", "data-digital-engineering"],
+    caseStudies: [],
+    outcomes: ["Mission Risk Reduction", "Automated Image Analytics", "Optimized Ground Resources"]
+  },
+  {
+    slug: "aviation",
+    title: "Aviation",
+    summary: "Improving safety, maintenance, operations, and decision-making across the aviation ecosystem.",
+    iconName: "Plane",
+    challenges: [
+      "Aircraft ground turnaround delays and dispatch reliability.",
+      "Predictive engine maintenance scheduling to prevent cancellations.",
+      "Complex crew scheduling and flight ops optimization."
+    ],
+    opportunities: [
+      "Predictive Fleet Maintenance: Engine sensor health monitoring.",
+      "Turnaround Optimization: Computer vision for apron operations.",
+      "Flight Plan & Fuel Optimization: AI route and fuel consumption tuning."
+    ],
+    roadmap: [
+      { phase: "Phase 1", title: "Fleet Telemetry Ingestion", duration: "1-2 Months", description: "Integrate engine and flight data recorders." }
+    ],
+    solutions: ["supply-chain-intelligence", "ai-implementation"],
+    caseStudies: [],
+    outcomes: ["Higher On-Time Performance", "Lower Fuel Consumption", "Reduced Maintenance Costs"]
+  },
+  {
+    slug: "semiconductor",
+    title: "Semiconductor",
+    summary: "Optimizing design, manufacturing, yield, and supply chains with AI-driven intelligence.",
     iconName: "Cpu",
-    bgImage: "/images/manufacturing_consulting.jpg",
     challenges: [
-      "Unexpected machinery breakdowns leading to expensive factory downtime.",
-      "Manual and slow visual quality assurance inspections.",
-      "Complex manufacturing line scheduling with high variable dependencies."
+      "Complex fabrication yield optimization in nanometer processes.",
+      "Supply chain disruptions for specialized silicon substrates.",
+      "High cost of wafer defect inspection and testing cycles."
     ],
     opportunities: [
-      "Predictive Maintenance: IoT sensor analytics identifying anomalies before failures occur.",
-      "Assembly Simulation: Running digital twins to optimize factory layout modifications.",
-      "Automated Defect Detection: Real-time high-speed computer vision audits."
+      "Fab Yield Optimization: Multivariable ML analysis of wafer testing data.",
+      "Visual Defect Inspection: Deep learning computer vision on silicon dies.",
+      "Substrate Supply Chain Tower: Global visibility for critical raw materials."
     ],
     roadmap: [
-      { phase: "Phase 1", title: "Factory Floor Digitization", duration: "2 Months", description: "Instrument production machinery with vibration, temperature, and cycle sensors connecting to a central pipeline." },
-      { phase: "Phase 2", title: "Predictive Maintenance Modeling", duration: "3 Months", description: "Train anomaly detection models on historical machine downtime logs and real-time streams." },
-      { phase: "Phase 3", title: "Digital Twin Construction", duration: "4-5 Months", description: "Construct a 3D simulation of assembly processes to test line modifications." },
-      { phase: "Phase 4", title: "Closed-Loop Automation", duration: "6 Months+", description: "Integrate predictive alerts directly into the ERP to automate maintenance dispatch." }
+      { phase: "Phase 1", title: "Yield Data Integration", duration: "2 Months", description: "Connect fab tester logs to high-performance AI cluster." }
     ],
-    solutions: ["digital-twin-simulation", "process-automation", "supply-chain-tower"],
-    caseStudies: [
-      {
-        title: "Downtime Prevention at Heavy Machinery Plant",
-        challenge: "An automotive supplier lost an average of $80,000 per hour during unexpected casting-press failure events.",
-        solution: "Installed vibration sensors and trained models to flag abnormal wear patterns.",
-        outcome: "Moved from reactive to predictive maintenance scheduling.",
-        metrics: [
-          "74% Reduction in unplanned machine downtime",
-          "22% Extension in heavy machinery tool life",
-          "$1.4M saved in plant operational budgets in Year 1"
-        ]
-      }
-    ],
-    outcomes: [
-      "Increased plant equipment efficiency (OEE)",
-      "Minimized material wastage through real-time defect audits",
-      "Reduced safety hazards by predicting mechanical failures"
-    ]
-  },
-  {
-    slug: "financial-services",
-    title: "Financial Services",
-    summary: "Accelerate credit auditing, detect complex transaction fraud patterns, and provide personalized wealth management advisory with robust AI risk controls.",
-    iconName: "DollarSign",
-    bgImage: "/images/financial_consulting.jpg",
-    challenges: [
-      "Rigid legacy fraud engines generating high false-alarm rates.",
-      "Slow, manual credit auditing and document review for commercial loans.",
-      "High compliance overhead and audit trail management requirements."
-    ],
-    opportunities: [
-      "Real-time Fraud Modeling: Self-learning neural networks auditing transaction queues.",
-      "Credit Extraction Pipeline: Automated parsing of corporate tax sheets and banking logs.",
-      "Regulatory Audit Agent: LLM agents cross-referencing files against compliance logs."
-    ],
-    roadmap: [
-      { phase: "Phase 1", title: "Security & Sandbox Architecture", duration: "2 Months", description: "Deploy a highly secure, private cloud environment conforming to SOC2 and financial privacy regulations." },
-      { phase: "Phase 2", title: "Document Intelligence Intake", duration: "3 Months", description: "Deploy AI parsing engines for processing loan applications and extracting financial tables." },
-      { phase: "Phase 3", title: "Fraud Model Upgrade", duration: "4-5 Months", description: "Integrate advanced graph neural network layers into active transaction queues." },
-      { phase: "Phase 4", title: "Compliance Automation Agent", duration: "6 Months+", description: "Automate regulatory audit report generation and compliance monitoring." }
-    ],
-    solutions: ["document-intelligence", "executive-decision-intelligence", "process-automation"],
-    caseStudies: [
-      {
-        title: "Credit Audit Automation for Commercial Lender",
-        challenge: "An investment bank spent weeks parsing unstructured company reports during small-business loan evaluations.",
-        solution: "Built a Vision-LLM spreadsheet extractor that standardizes ledger and tax returns data.",
-        outcome: "Accelerated credit audit loops, enabling faster approvals without compromising risk profiles.",
-        metrics: [
-          "Loan evaluation cycles cut from 14 days to 40 minutes",
-          "99.6% Extraction Accuracy of financial cells",
-          "45% Increase in loan processing volume capability"
-        ]
-      }
-    ],
-    outcomes: [
-      "Drastic reduction in compliance audit times",
-      "Minimized fraud losses while reducing customer transaction friction",
-      "Higher commercial underwriting throughput"
-    ]
-  },
-  {
-    slug: "logistics",
-    title: "Logistics",
-    summary: "Optimize multi-modal distribution routes, automate warehouse inventory auditing, and orchestrate global carrier networks dynamically.",
-    iconName: "Truck",
-    bgImage: "/images/logistics_consulting.jpg",
-    challenges: [
-      "Unpredictable freight market pricing and capacity volatility.",
-      "Inefficient route planning leading to excess fuel usage and delivery delays.",
-      "Lack of dynamic exception handling in last-mile transport."
-    ],
-    opportunities: [
-      "Dynamic Routing Engines: Simulating weather, traffic, and vehicle states to calculate optimal routes.",
-      "Global Network Visibility: Control towers monitoring carrier APIs and GPS updates.",
-      "Automated Bill of Lading Audit: Vision-AI ingesting customs and loading slips."
-    ],
-    roadmap: [
-      { phase: "Phase 1", title: "Carrier API Aggregation", duration: "2 Months", description: "Build unified API bridges across all 3PL partners to pull real-time location logs." },
-      { phase: "Phase 2", title: "Custom Routing Deployment", duration: "3 Months", description: "Integrate dynamic routing models with dispatch dispatch dashboards." },
-      { phase: "Phase 3", title: "Exception Automation", duration: "4-5 Months", description: "Deploy alert agents that auto-reroute cargo when bottlenecks are flagged." },
-      { phase: "Phase 4", title: "Logistics Control Tower Integration", duration: "6 Months+", description: "Connect freight data directly with customer notification systems." }
-    ],
-    solutions: ["supply-chain-tower", "demand-forecasting", "process-automation"],
-    caseStudies: [
-      {
-        title: "Dynamic Dispatch Re-routing for Freight Carrier",
-        challenge: "A global logistics firm incurred heavy delay penalty fees due to unpredictable harbor congestion issues.",
-        solution: "Developed an exception-management control tower that monitored port wait times and auto-re-routed trucks.",
-        outcome: "Created a self-correcting logistics routing web, optimizing transport asset utilization.",
-        metrics: [
-          "26% Reduction in late-delivery penalties",
-          "14% Lower fuel consumption costs through route optimization",
-          "Improved cargo turnaround times by 1.5 days"
-        ]
-      }
-    ],
-    outcomes: [
-      "Optimized fleet resource utilization",
-      "Lower fuel costs and greenhouse emissions profiles",
-      "Unified operational control over disjoint carrier platforms"
-    ]
-  },
-  {
-    slug: "energy",
-    title: "Energy & Utilities",
-    summary: "Predict power grid demand anomalies, schedule turbine predictive maintenance, and balance renewable energy distribution grids using machine learning.",
-    iconName: "Zap",
-    bgImage: "/images/energy_consulting.jpg",
-    challenges: [
-      "Volatile solar and wind production levels disrupting grid stability.",
-      "Extremely expensive emergency maintenance events on remote infrastructure.",
-      "Highly complex regulatory frameworks governing energy generation."
-    ],
-    opportunities: [
-      "Grid Load Forecasting: Modeling grid load patterns by combining weather forecasts and industrial usage data.",
-      "Predictive Asset Maintenance: Thermal imagery and sensor analysis flagging wear in turbines.",
-      "Dynamic Pricing Integration: Adjusting grid pricing models automatically based on demand."
-    ],
-    roadmap: [
-      { phase: "Phase 1", title: "Grid Data Consolidation", duration: "2-3 Months", description: "Consolidate telemetry feeds from sub-stations, smart meters, and solar farms." },
-      { phase: "Phase 2", title: "Load Forecasting Engine", duration: "3 Months", description: "Deploy high-accuracy predictive load simulators to prevent grid overloads." },
-      { phase: "Phase 3", title: "Predictive Maintenance Pilots", duration: "4-5 Months", description: "Deploy drone visual analysis pipelines to scan remote grid equipment." },
-      { phase: "Phase 4", title: "Automated Grid Balancing", duration: "6 Months+", description: "Automate dynamic power routing to optimize battery storage grids." }
-    ],
-    solutions: ["demand-forecasting", "digital-twin-simulation", "knowledge-assistant"],
-    caseStudies: [
-      {
-        title: "Wind Turbine Lifetime Extension through Predictive AI",
-        challenge: "An offshore wind farm suffered from frequent, unpredicted gearbox failures that took weeks to repair.",
-        solution: "Built anomaly-detection models utilizing vibration sensors and oil-quality telemetry feeds.",
-        outcome: "Enabled engineers to schedule repairs during low-wind windows, avoiding emergency costs.",
-        metrics: [
-          "82% Reduction in emergency offshore logistics fees",
-          "5% Higher annual wind energy production (AEP)",
-          "Extended gearbox asset life by an average of 4 years"
-        ]
-      }
-    ],
-    outcomes: [
-      "Drastically lower grid operational risks",
-      "Higher yield integration of fluctuating renewable assets",
-      "Lower compliance reporting overhead through automated logs"
-    ]
-  },
-  {
-    slug: "public-sector",
-    title: "Government & Public Sector",
-    summary: "Enhance citizen services delivery, optimize resource allocation budgets, and streamline public records filing using highly secure, sovereign AI models.",
-    iconName: "Globe",
-    bgImage: "/images/public_sector_consulting.jpg",
-    challenges: [
-      "Outdated municipal back-office software and slow paper filing.",
-      "Overburdened support centers causing poor citizen experiences.",
-      "Strict data sovereignty and public compliance requirements."
-    ],
-    opportunities: [
-      "Citizen Document Audit: Ingesting license filings and building permits.",
-      "Sovereign Knowledge Portal: RAG portals answering administrative queries safely.",
-      "Resource Allocation Simulation: Optimizing city public transit lines."
-    ],
-    roadmap: [
-      { phase: "Phase 1", title: "On-Prem / Sovereign Cloud Setup", duration: "3 Months", description: "Configure localized cloud hostings conforming to municipal data sovereignty laws." },
-      { phase: "Phase 2", title: "Citizen Portal Assist", duration: "3 Months", description: "Launch secure semantic assistants helping citizens find services and file documents." },
-      { phase: "Phase 3", title: "Municipal Ingestion Automation", duration: "4-5 Months", description: "Deploy document extraction tools to process permits and licenses." },
-      { phase: "Phase 4", title: "Transit Network Simulation", duration: "6 Months+", description: "Utilize digital twin simulation systems to plan bus and transit network routes." }
-    ],
-    solutions: ["knowledge-assistant", "document-intelligence", "digital-twin-simulation"],
-    caseStudies: [
-      {
-        title: "Municipal Build Permit Extraction System",
-        challenge: "A city administration had a backlog of 14,000 building permit forms, delaying infrastructure projects.",
-        solution: "Built a secure local Document Intelligence system to classify permits and verify inputs.",
-        outcome: "Cleaned the application backlog, accelerating municipal zoning review cycles.",
-        metrics: [
-          "Permit intake processing time cut by 85%",
-          "Zero public data leaks or compliance violations",
-          "Cleared backlog within 3 months of deployment"
-        ]
-      }
-    ],
-    outcomes: [
-      "Faster citizen filing and turnaround times",
-      "Reduced municipal operational backlogs",
-      "Complete transparency and security audit logs"
-    ]
-  },
-  {
-    slug: "professional-services",
-    title: "Professional Services",
-    summary: "Boost billable consultant productivity, automate complex proposal workflows, and run high-accuracy contract audits using intelligent document analysis.",
-    iconName: "Briefcase",
-    bgImage: "/images/professional_services_consulting.jpg",
-    challenges: [
-      "Billable hours lost to manual legal research and presentation compilation.",
-      "High costs and errors in auditing thousands of third-party contracts.",
-      "Slow, manual RFP proposal writing processes."
-    ],
-    opportunities: [
-      "Strategic Proposal Assistants: Ingesting project scope sheets to output tailored bids.",
-      "Contract Audit Scanners: Vision-LLMs scanning documents for unfavorable clauses.",
-      "Automated Report Generation: Compiling technical data logs into readable PDFs."
-    ],
-    roadmap: [
-      { phase: "Phase 1", title: "Knowledge Hub Compilation", duration: "2 Months", description: "Extract and vectorize historical proposal documents and template archives." },
-      { phase: "Phase 2", title: "Proposal Assistant Pilot", duration: "3 Months", description: "Deploy a RAG-based drafting assistant for the business development team." },
-      { phase: "Phase 3", title: "Contract Analysis Engine", duration: "4-5 Months", description: "Integrate contract auditing tools into legal and procurement workflows." },
-      { phase: "Phase 4", title: "Operational Scaling", duration: "6 Months+", description: "Roll out automated report-writing and slide deck outline builders." }
-    ],
-    solutions: ["knowledge-assistant", "document-intelligence", "process-automation"],
-    caseStudies: [
-      {
-        title: "Proposal Automation for Consulting Network",
-        challenge: "A professional services group spent days drafting complex technical responses to corporate RFPs.",
-        solution: "Engineered an AI Proposal Assistant using historic bids data with strict quality gates.",
-        outcome: "Accelerated the bidding cycle, allowing BD teams to double daily output.",
-        metrics: [
-          "RFP proposal draft cycle reduced by 60%",
-          "30% increase in contract win rate due to personalized scope details",
-          "Recovered 18 monthly administrative hours per consultant"
-        ]
-      }
-    ],
-    outcomes: [
-      "Increased billable team utilization rates",
-      "Faster proposal turnaround times, capturing more market share",
-      "Standardized contract compliance and risk mitigations"
-    ]
+    solutions: ["ai-implementation", "data-digital-engineering"],
+    caseStudies: [],
+    outcomes: ["Increased Wafer Yield", "Early Defect Detection", "Resilient Silicon Supply Chain"]
   }
 ];

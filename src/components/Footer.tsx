@@ -1,146 +1,269 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-import { Mail, Phone, MapPin } from "lucide-react";
-import { solutions } from "../data/solutions";
-import { industries } from "../data/industries";
+import { ArrowRight, Mail, MapPin, Globe } from "lucide-react";
+import BrandLogo from "./BrandLogo";
 
 export default function Footer() {
   return (
-    <footer className="footer" aria-label="Main Footer">
-      <div className="container footer-grid-container">
-        {/* Logo and Tagline Column */}
-        <div className="footer-brand-col">
-          <Link href="/" className="logo-link footer-logo" aria-label="Shaw & Goswami Consulting Home">
-            <div className="logo-icon footer-logo-icon">
-              <span>SG</span>
-            </div>
-            <div className="logo-text">
-              <span className="logo-title footer-logo-title">Shaw & Goswami</span>
-              <span className="logo-subtitle footer-logo-subtitle">CONSULTING</span>
-            </div>
-          </Link>
-          <p className="footer-tagline">
-            Business consulting and AI solutions that help organizations transform, innovate and grow in the AI era.
-          </p>
-          <div className="footer-socials" aria-label="Social media channels">
-            {/* Custom Inline SVG for LinkedIn */}
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-            </a>
-            {/* Custom Inline SVG for Twitter / X */}
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Twitter">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-              </svg>
-            </a>
-            {/* Custom Inline SVG for YouTube */}
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="YouTube">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-              </svg>
-            </a>
+    <footer className="site-footer">
+      <div className="footer-top-container">
+        <div className="footer-grid">
+          {/* Col 1: Brand Info */}
+          <div className="footer-col brand-col">
+            <BrandLogo layout="horizontal" variant="light" />
+            <p className="footer-tagline" style={{ marginTop: "1rem" }}>
+              Where AI Meets Business Goals. We help leadership teams pinpoint operational friction and execute AI roadmaps that deliver measurable P&L growth.
+            </p>
           </div>
-        </div>
 
-        {/* Solutions Column */}
-        <div className="footer-col">
-          <h3 className="footer-col-title">Solutions</h3>
-          <ul className="footer-links">
-            {solutions.slice(0, 5).map((sol) => (
-              <li key={sol.slug}>
-                <Link href={`/solutions/${sol.slug}`}>{sol.title}</Link>
-              </li>
-            ))}
-            {solutions.length > 5 && (
-              <li className="footer-more-link-li">
-                <Link href="/solutions" className="footer-more-link">
-                  View All Solutions &rarr;
-                </Link>
-              </li>
-            )}
-          </ul>
-        </div>
+          {/* Col 2: Services */}
+          <div className="footer-col">
+            <h4 className="footer-heading">Services</h4>
+            <ul className="footer-links">
+              <li><Link href="/solutions">Strategy & Consulting</Link></li>
+              <li><Link href="/solutions">Business Transformation</Link></li>
+              <li><Link href="/solutions">AI Strategy & Roadmap</Link></li>
+              <li><Link href="/solutions">Data & Digital Engineering</Link></li>
+              <li><Link href="/solutions">AI Implementation</Link></li>
+              <li><Link href="/solutions">Governance & Compliance</Link></li>
+            </ul>
+          </div>
 
-        {/* Industries Column */}
-        <div className="footer-col">
-          <h3 className="footer-col-title">Industries</h3>
-          <ul className="footer-links">
-            {industries.slice(0, 5).map((ind) => (
-              <li key={ind.slug}>
-                <Link href={`/industries/${ind.slug}`}>{ind.title}</Link>
-              </li>
-            ))}
-            {industries.length > 5 && (
-              <li className="footer-more-link-li">
-                <Link href="/industries" className="footer-more-link">
-                  View All Industries &rarr;
-                </Link>
-              </li>
-            )}
-          </ul>
-        </div>
+          {/* Col 3: Navigation & Company */}
+          <div className="footer-col">
+            <h4 className="footer-heading">Navigation</h4>
+            <ul className="footer-links">
+              <li><Link href="/solutions">Product & Services</Link></li>
+              <li><Link href="/industries">Industries</Link></li>
+              <li><Link href="/about">About Us</Link></li>
+              <li><Link href="/insights">Insights</Link></li>
+              <li><Link href="/clients">Clients & Impact</Link></li>
+              <li><Link href="/faqs">Smart FAQs</Link></li>
+            </ul>
+          </div>
 
-        {/* Company Column */}
-        <div className="footer-col">
-          <h3 className="footer-col-title">Company</h3>
-          <ul className="footer-links">
-            <li>
-              <Link href="/about">About Us</Link>
-            </li>
-            <li>
-              <Link href="/about#approach">Our Approach</Link>
-            </li>
-            <li>
-              <Link href="/insights">Insights</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact Us</Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Contact Info Column */}
-        <div className="footer-col footer-contact-col">
-          <h3 className="footer-col-title">Get in Touch</h3>
-          <ul className="footer-contact-info">
-            <li>
-              <a href="mailto:info@shawandgoswami.in" className="contact-link">
-                <Mail size={16} />
-                <span>info@shawandgoswami.in</span>
-              </a>
-            </li>
-            <li>
-              <a href="tel:+919830098059" className="contact-link">
-                <Phone size={16} />
-                <span>+91 98300 98059</span>
-              </a>
-            </li>
-            <li>
-              <div className="contact-address">
+          {/* Col 4: Contact & Consultation */}
+          <div className="footer-col contact-col">
+            <h4 className="footer-heading">Connect With Us</h4>
+            <ul className="footer-contact-info">
+              <li>
                 <MapPin size={16} />
-                <span>Kolkata, India</span>
-              </div>
-            </li>
-          </ul>
+                <span>Global Practice across UK, India, East Asia & Africa</span>
+              </li>
+              <li>
+                <Mail size={16} />
+                <a href="mailto:contact@shawandgoswami.in">contact@shawandgoswami.in</a>
+              </li>
+              <li>
+                <Globe size={16} />
+                <span>www.shawandgoswami.in</span>
+              </li>
+            </ul>
+            <div className="footer-cta-box">
+              <Link href="/contact" className="footer-cta-btn">
+                BOOK A STRATEGY CALL <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="footer-bottom">
-        <div className="container footer-bottom-container">
-          <p className="copyright">
-            &copy; {new Date().getFullYear()} Shaw & Goswami Consulting. All Rights Reserved.
-          </p>
+      <div className="footer-bottom-bar">
+        <div className="footer-bottom-inner">
+          <p>© {new Date().getFullYear()} Shaw & Goswami Consulting. All rights reserved.</p>
           <div className="footer-bottom-links">
             <Link href="/privacy">Privacy Policy</Link>
-            <Link href="/terms">Terms of Use</Link>
+            <span>•</span>
+            <Link href="/terms">Terms of Service</Link>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .site-footer {
+          background-color: var(--color-navy-dark);
+          color: #A0AEC0;
+          font-family: var(--font-secondary);
+          padding-top: 4.5rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-top-container {
+          max-width: var(--max-width-desktop);
+          margin: 0 auto;
+          padding: 0 1.5rem 4rem 1.5rem;
+        }
+
+        .footer-grid {
+          display: grid;
+          grid-template-columns: 2fr 1.25fr 1fr 1.5fr;
+          gap: 3rem;
+        }
+
+        .footer-brand-logo {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          text-decoration: none;
+          margin-bottom: 1.25rem;
+        }
+
+        .logo-sg {
+          font-family: var(--font-primary);
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--color-white);
+        }
+
+        .logo-divider {
+          width: 1.5px;
+          height: 24px;
+          background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .brand-name {
+          font-size: 0.8125rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: var(--color-white);
+        }
+
+        .footer-tagline {
+          color: #A0AEC0;
+          font-size: 0.9375rem;
+          line-height: 1.6;
+          max-width: 340px;
+        }
+
+        .footer-heading {
+          color: var(--color-white);
+          font-family: var(--font-secondary);
+          font-size: 0.9375rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .footer-links a {
+          color: #A0AEC0;
+          font-size: 0.875rem;
+          text-decoration: none;
+          transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+          color: var(--color-coral-hero);
+        }
+
+        .footer-contact-info {
+          list-style: none;
+          margin: 0 0 1.5rem 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          font-size: 0.875rem;
+        }
+
+        .footer-contact-info li {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.75rem;
+          color: #CBD5E0;
+        }
+
+        .footer-contact-info a {
+          color: #CBD5E0;
+          text-decoration: none;
+        }
+
+        .footer-contact-info a:hover {
+          color: var(--color-coral-hero);
+        }
+
+        .footer-cta-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          background-color: var(--color-coral-hero);
+          color: var(--color-navy-dark);
+          font-size: 0.8125rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          padding: 0.65rem 1.2rem;
+          border-radius: var(--border-radius-sm);
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+
+        .footer-cta-btn:hover {
+          background-color: #f09583;
+          transform: translateY(-1px);
+        }
+
+        .footer-bottom-bar {
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          padding: 1.5rem 0;
+          background-color: var(--color-navy-deep);
+        }
+
+        .footer-bottom-inner {
+          max-width: var(--max-width-desktop);
+          margin: 0 auto;
+          padding: 0 1.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 0.8125rem;
+          color: #718096;
+        }
+
+        .footer-bottom-links {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+        }
+
+        .footer-bottom-links a {
+          color: #718096;
+          text-decoration: none;
+        }
+
+        .footer-bottom-links a:hover {
+          color: var(--color-white);
+        }
+
+        @media (max-width: 992px) {
+          .footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+          .footer-bottom-inner {
+            flex-direction: column;
+            gap: 0.75rem;
+            text-align: center;
+          }
+        }
+      `}</style>
     </footer>
   );
 }

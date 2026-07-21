@@ -3,15 +3,12 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
-import { solutions } from "../data/solutions";
-import { industries } from "../data/industries";
+import { Menu, X, ArrowRight } from "lucide-react";
+import BrandLogo from "./BrandLogo";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [solutionsDropdownOpen, setSolutionsDropdownOpen] = useState(false);
-  const [industriesDropdownOpen, setIndustriesDropdownOpen] = useState(false);
   
   const pathname = usePathname();
 
@@ -28,133 +25,56 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menus on page transition
+  // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
-    setSolutionsDropdownOpen(false);
-    setIndustriesDropdownOpen(false);
   }, [pathname]);
+
+  // Order with ABOUT US at first position
+  const reorderedNavItems = [
+    { label: "ABOUT US", href: "/about" },
+    { label: "PRODUCT AND SERVICES", href: "/solutions" },
+    { label: "INDUSTRIES", href: "/industries" },
+    { label: "INSIGHTS", href: "/insights" },
+    { label: "CLIENTS", href: "/clients" },
+    { label: "FAQS", href: "/faqs" }
+  ];
 
   return (
     <>
-      <header className={`header ${isScrolled ? "header-scrolled" : ""}`}>
-        <div className="header-container">
-          {/* Logo */}
-          <Link href="/" className="logo-link" aria-label="Shaw & Goswami Consulting Home">
-            <div className="logo-icon">
-              <span>SG</span>
-            </div>
-            <div className="logo-text">
-              <span className="logo-title">Shaw & Goswami</span>
-              <span className="logo-subtitle">CONSULTING</span>
-            </div>
-          </Link>
+      <header className={`site-header ${isScrolled ? "scrolled" : ""}`}>
+        <div className="header-inner">
+          {/* Top-Left Modular Brand Logo */}
+          <BrandLogo layout="horizontal" variant="dark" />
 
           {/* Desktop Navigation */}
           <nav className="desktop-nav" aria-label="Main Navigation">
-            <ul className="nav-list">
-              <li>
-                <Link href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>
-                  Home
-                </Link>
-              </li>
-
-              {/* Solutions Dropdown */}
-              <li 
-                className="dropdown-item"
-                onMouseEnter={() => setSolutionsDropdownOpen(true)}
-                onMouseLeave={() => setSolutionsDropdownOpen(false)}
-              >
-                <button 
-                  className={`nav-link dropdown-toggle ${pathname.startsWith("/solutions") ? "active" : ""}`}
-                  aria-expanded={solutionsDropdownOpen}
-                  aria-haspopup="true"
-                >
-                  Solutions <ChevronDown size={14} />
-                </button>
-                <ul className={`dropdown-menu ${solutionsDropdownOpen ? "show" : ""}`}>
-                  {solutions.map((item) => (
-                    <li key={item.slug}>
-                      <Link href={`/solutions/${item.slug}`} className="dropdown-link">
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
-                  <li className="dropdown-divider-li">
-                    <Link href="/solutions" className="dropdown-link view-all-link">
-                      View All Solutions <ArrowRight size={14} />
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-
-              {/* Industries Dropdown */}
-              <li 
-                className="dropdown-item"
-                onMouseEnter={() => setIndustriesDropdownOpen(true)}
-                onMouseLeave={() => setIndustriesDropdownOpen(false)}
-              >
-                <button 
-                  className={`nav-link dropdown-toggle ${pathname.startsWith("/industries") ? "active" : ""}`}
-                  aria-expanded={industriesDropdownOpen}
-                  aria-haspopup="true"
-                >
-                  Industries <ChevronDown size={14} />
-                </button>
-                <ul className={`dropdown-menu ${industriesDropdownOpen ? "show" : ""}`}>
-                  {industries.map((item) => (
-                    <li key={item.slug}>
-                      <Link href={`/industries/${item.slug}`} className="dropdown-link">
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
-                  <li className="dropdown-divider-li">
-                    <Link href="/industries" className="dropdown-link view-all-link">
-                      View All Industries <ArrowRight size={14} />
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-
-              <li>
-                <Link href="/case-studies" className={`nav-link ${pathname.startsWith("/case-studies") ? "active" : ""}`}>
-                  Case Studies
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/insights" className={`nav-link ${pathname.startsWith("/insights") ? "active" : ""}`}>
-                  Insights
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/about" className={`nav-link ${pathname === "/about" ? "active" : ""}`}>
-                  About
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/contact" className={`nav-link ${pathname === "/contact" ? "active" : ""}`}>
-                  Contact Us
-                </Link>
-              </li>
+            <ul className="nav-items">
+              {reorderedNavItems.map((item) => (
+                <li key={item.href}>
+                  <Link 
+                    href={item.href} 
+                    className={`nav-link ${pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href)) ? "active" : ""}`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="header-cta-wrapper">
-            <Link href="/contact" className="btn btn-primary header-cta">
-              Book a Strategy Consultation
+          {/* Primary Visible Button CTA */}
+          <div className="header-cta-block">
+            <Link href="/contact" className="btn-cta-navy">
+              BOOK A STRATEGY CALL <ArrowRight size={15} />
             </Link>
           </div>
 
-          {/* Mobile Hamburger Toggle */}
+          {/* Mobile Menu Toggle Button */}
           <button 
-            className="mobile-toggle-btn"
+            className="mobile-menu-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
             aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -162,70 +82,161 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Nav Drawer */}
-      <div className={`mobile-nav-drawer ${mobileMenuOpen ? "open" : ""}`} aria-hidden={!mobileMenuOpen}>
-        <div className="mobile-nav-container">
-          <nav className="mobile-nav-menu" aria-label="Mobile Navigation">
-            <ul>
-              <li>
-                <Link href="/" className="mobile-nav-link">Home</Link>
-              </li>
-              <li>
-                <div className="mobile-submenu-header">Solutions</div>
-                <ul className="mobile-submenu-list">
-                  <li>
-                    <Link href="/solutions" className="mobile-submenu-link bold">
-                      All Solutions
-                    </Link>
-                  </li>
-                  {solutions.map((item) => (
-                    <li key={item.slug}>
-                      <Link href={`/solutions/${item.slug}`} className="mobile-submenu-link">
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              <li>
-                <div className="mobile-submenu-header">Industries</div>
-                <ul className="mobile-submenu-list">
-                  <li>
-                    <Link href="/industries" className="mobile-submenu-link bold">
-                      All Industries
-                    </Link>
-                  </li>
-                  {industries.map((item) => (
-                    <li key={item.slug}>
-                      <Link href={`/industries/${item.slug}`} className="mobile-submenu-link">
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              <li>
-                <Link href="/case-studies" className="mobile-nav-link">Case Studies</Link>
-              </li>
-              <li>
-                <Link href="/insights" className="mobile-nav-link">Insights</Link>
-              </li>
-              <li>
-                <Link href="/about" className="mobile-nav-link">About</Link>
-              </li>
-              <li>
-                <Link href="/contact" className="mobile-nav-link">Contact Us</Link>
-              </li>
-              <li style={{ marginTop: "2rem" }}>
-                <Link href="/contact" className="btn btn-primary" style={{ width: "100%" }}>
-                  Book a Consultation
+      {/* Mobile Navigation Drawer */}
+      {mobileMenuOpen && (
+        <div className="mobile-drawer">
+          <nav aria-label="Mobile Navigation">
+            <ul className="mobile-nav-list">
+              {reorderedNavItems.map((item) => (
+                <li key={item.href}>
+                  <Link 
+                    href={item.href} 
+                    className={`mobile-nav-item ${pathname === item.href ? "active" : ""}`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+              <li style={{ marginTop: "1.5rem" }}>
+                <Link href="/contact" className="btn-cta-navy" style={{ width: "100%", justifyContent: "center" }}>
+                  BOOK A STRATEGY CALL <ArrowRight size={16} />
                 </Link>
               </li>
             </ul>
           </nav>
         </div>
-      </div>
+      )}
 
+      <style jsx>{`
+        .site-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          background-color: var(--color-coral-hero);
+          border-bottom: 1px solid rgba(11, 19, 43, 0.18);
+          transition: all 0.3s ease;
+          padding: 0.85rem 0;
+        }
+
+        .site-header.scrolled {
+          box-shadow: 0 4px 20px rgba(11, 19, 43, 0.12);
+          background-color: rgba(232, 130, 112, 0.98);
+          backdrop-filter: blur(12px);
+          padding: 0.65rem 0;
+        }
+
+        .header-inner {
+          max-width: 1380px;
+          margin: 0 auto;
+          padding: 0 1.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1.5rem;
+        }
+
+        .desktop-nav {
+          display: flex;
+          align-items: center;
+          flex-shrink: 0;
+        }
+
+        .nav-items {
+          display: flex;
+          align-items: center;
+          gap: 1.35rem;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .nav-link {
+          font-family: var(--font-secondary);
+          font-size: 0.785rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          color: var(--color-navy-dark);
+          text-decoration: none;
+          padding: 0.4rem 0;
+          position: relative;
+          white-space: nowrap;
+          transition: opacity 0.2s ease;
+        }
+
+        .nav-link:hover {
+          opacity: 0.75;
+        }
+
+        .nav-link.active::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 2.5px;
+          background-color: var(--color-navy-dark);
+          border-radius: 2px;
+        }
+
+        .header-cta-block {
+          flex-shrink: 0;
+        }
+
+        .mobile-menu-toggle {
+          display: none;
+          background: none;
+          border: none;
+          color: var(--color-navy-dark);
+          cursor: pointer;
+          padding: 0.5rem;
+        }
+
+        .mobile-drawer {
+          position: fixed;
+          top: 70px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: var(--color-coral-hero);
+          z-index: 999;
+          padding: 2rem 1.5rem;
+          overflow-y: auto;
+        }
+
+        .mobile-nav-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+
+        .mobile-nav-item {
+          font-family: var(--font-secondary);
+          font-size: 1.125rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          color: var(--color-navy-dark);
+          text-decoration: none;
+          display: block;
+          padding: 0.5rem 0;
+          border-bottom: 1px solid rgba(11, 19, 43, 0.1);
+        }
+
+        @media (max-width: 1120px) {
+          .desktop-nav,
+          .header-cta-block {
+            display: none;
+          }
+
+          .mobile-menu-toggle {
+            display: block;
+          }
+        }
+      `}</style>
     </>
   );
 }

@@ -1,7 +1,7 @@
 /* Brand Design System & Core Tokens */
 :root {
   /* Brand Coral & Navy Palette */
-  --color-coral-hero: #E88270;
+  --color-coral-hero: #F5DCDC;
   --color-coral-light: #FCEBE6;
   --color-coral-border: #F7B5A8;
   --color-navy-dark: #0B132B;
@@ -62,7 +62,7 @@ html {
   height: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
-  background-color: #E88270 !important;
+  background-color: #F5DCDC !important;
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -70,7 +70,7 @@ html {
 body {
   min-height: 100%;
   color: var(--color-text-dark);
-  background-color: #E88270 !important;
+  background-color: #F5DCDC !important;
   font-family: var(--font-secondary);
   font-size: var(--font-size-body);
   line-height: 1.6;
@@ -235,7 +235,7 @@ a.btn-cta-coral {
   align-items: center !important;
   justify-content: center !important;
   gap: 0.6rem !important;
-  background-color: #E88270 !important;
+  background-color: #F5DCDC !important;
   color: #0B132B !important;
   font-family: var(--font-secondary), -apple-system, sans-serif !important;
   font-size: 0.875rem !important;
@@ -243,8 +243,8 @@ a.btn-cta-coral {
   letter-spacing: 0.06em !important;
   padding: 0.95rem 1.85rem !important;
   border-radius: 4px !important;
-  border: 1.5px solid #E88270 !important;
-  box-shadow: 0 4px 14px rgba(232, 130, 112, 0.3) !important;
+  border: 1.5px solid #F5DCDC !important;
+  box-shadow: 0 4px 14px rgba(245, 220, 220, 0.4) !important;
   text-decoration: none !important;
   cursor: pointer !important;
   transition: all 0.25s ease !important;
@@ -252,7 +252,7 @@ a.btn-cta-coral {
 
 .btn-cta-coral:hover,
 a.btn-cta-coral:hover {
-  background-color: #f09583 !important;
+  background-color: #E8C3C3 !important;
   color: #0B132B !important;
   transform: translateY(-2px) !important;
 }

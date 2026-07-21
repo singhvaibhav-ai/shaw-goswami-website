@@ -122,7 +122,7 @@ export default function Header() {
 
         .site-header.scrolled {
           box-shadow: 0 4px 20px rgba(11, 19, 43, 0.12);
-          background-color: rgba(232, 130, 112, 0.98);
+          background-color: rgba(245, 220, 220, 0.98);
           backdrop-filter: blur(12px);
           padding: 0.65rem 0;
         }

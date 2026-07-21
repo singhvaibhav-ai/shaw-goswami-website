@@ -417,7 +417,7 @@ export default function FAQsPage() {
         }
 
         .accordion-item.open {
-          border-color: #E88270;
+          border-color: #F5DCDC;
           box-shadow: 0 4px 14px rgba(11, 19, 43, 0.06);
         }
 

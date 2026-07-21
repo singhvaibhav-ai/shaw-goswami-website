@@ -188,7 +188,7 @@ export default function SolutionsPage() {
             <div className="accel-pills-wrap">
               {industryAcceleratorsExamples.map((ex, idx) => (
                 <span key={idx} className="accel-pill-item">
-                  <CheckCircle2 size={14} color="#E88270" />
+                  <CheckCircle2 size={14} color="#0B132B" />
                   {ex}
                 </span>
               ))}
@@ -397,7 +397,7 @@ export default function SolutionsPage() {
         .consulting-card:hover {
           transform: translateY(-3px);
           box-shadow: 0 10px 28px rgba(11, 19, 43, 0.08);
-          border-color: #E88270;
+          border-color: #F5DCDC;
         }
 
         .card-top-icon {

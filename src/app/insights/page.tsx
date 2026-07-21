@@ -208,9 +208,9 @@ export default function InsightsPage() {
               <p>Subscribe to our newsletter and get the latest insights on AI, strategy, and industry trends delivered to your inbox.</p>
               
               <div className="nl-features">
-                <span><CheckCircle2 size={16} color="#E88270" /> Expert Perspectives</span>
-                <span><CheckCircle2 size={16} color="#E88270" /> Emerging Trends</span>
-                <span><CheckCircle2 size={16} color="#E88270" /> Exclusive Updates</span>
+                <span><CheckCircle2 size={16} color="#F5DCDC" /> Expert Perspectives</span>
+                <span><CheckCircle2 size={16} color="#F5DCDC" /> Emerging Trends</span>
+                <span><CheckCircle2 size={16} color="#F5DCDC" /> Exclusive Updates</span>
               </div>
             </div>
 

@@ -99,14 +99,15 @@ export default function ContactPage() {
                 <p style={{ fontSize: "0.875rem", color: "var(--color-text-gray)", marginBottom: "1.5rem" }}>
                   Skip the form and select a time directly on our consulting partner calendar.
                 </p>
-                {/* INSERT CALENDLY LINK */}
-                <button 
-                  onClick={() => alert("Calendly popup simulated. In production, this will launch the Calendly widget.")}
+                <a 
+                  href="https://calendly.com/ankesh-shawandgoswami/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn btn-secondary-dark" 
-                  style={{ width: "100%" }}
+                  style={{ width: "100%", display: "inline-flex", textDecoration: "none" }}
                 >
                   Open Calendar Scheduler
-                </button>
+                </a>
               </div>
             </div>
 
